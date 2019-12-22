@@ -1,15 +1,15 @@
 
 # gRPC Flatbuffers Example
 
-A simple bookmarking service defined in the FlatBuffers IDL, and creation of gRPC server interfaces and client stubs. (`bookmarks.fbs`)
+A simple bookmarking service defined in the FlatBuffers IDL, and creation of gRPC server interfaces and client stubs. (`fileupload.fbs`)
 
-A Protocol Buffers IDL has also been provided for comparison. (`bookmarks.proto`)
+A Protocol Buffers IDL has also been provided for comparison. (`fileupload.proto`)
 
 ### Instructions
 
 #### Compile the FlatBuffers IDL file
 ```
-flatc --go --grpc bookmarks.fbs
+flatc --go --grpc fileupload.fbs
 ```
 
 ### Compile the Go Server & Client
@@ -24,9 +24,7 @@ make compile
 
 #### Send commands via Client
 ```
-./client last-added
-./client add http://google.com Google
-./client last-added
+./client <filename> 
 ```
 
 Run `./server`

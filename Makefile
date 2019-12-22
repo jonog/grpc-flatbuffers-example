@@ -1,17 +1,21 @@
 
 
 generate_fbs:
-	flatc --go --grpc bookmarks.fbs
+	flatc --go --grpc fileupload.fbs
 
 generate_proto:
-	protoc bookmarks.proto --go_out=plugins=grpc:bookmarkspb
+	mkdir fileuploadpb
+	protoc fileupload.proto --go_out=plugins=grpc:fileuploadpb
 
-compile: compile_bookmarks_client compile_bookmarks_server
+all: clean generate_proto generate_fbs compile_fileupload_client compile_fileupload_server
 
-compile_bookmarks_client:
-	cd bookmarks-client && go build -o ../client && cd ..
+compile_fileupload_client:
+	cd fileupload-client && go build -o ../client  && cd ..
 
-compile_bookmarks_server:
-	cd bookmarks-server && go build -o ../server && cd ..
+compile_fileupload_server:
+	cd fileupload-server && go build -o ../server  && cd ..
 
-.PHONY: generate_fbs generate_proto compile compile_bookmarks_client compile_bookmarks_server
+clean:
+	rm -rf server client fileupload fileuploadpb
+
+.PHONY: clean generate_fbs generate_proto compile compile_fileupload_client compile_fileupload_server
